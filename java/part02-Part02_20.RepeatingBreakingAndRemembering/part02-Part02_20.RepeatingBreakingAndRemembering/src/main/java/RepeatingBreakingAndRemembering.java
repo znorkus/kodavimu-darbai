@@ -10,7 +10,7 @@ public class RepeatingBreakingAndRemembering {
         System.out.println("Give numbers:");
 
         int sum = 0;
-        int ones = 0;
+        int count = 0;
         int even = 0;
         int odd = 0;
 
@@ -28,12 +28,12 @@ public class RepeatingBreakingAndRemembering {
             }
 
             sum = sum + number;
-            ones = ones + 1;
+            count = count + 1;
         }
         System.out.println("Thx! Bye!");
         System.out.println("Sum: " + sum);
-        System.out.println("Numbers: " + ones);
-        System.out.println("Average: " + 1.0 * sum / ones);
+        System.out.println("Numbers: " + count);
+        System.out.println("Average: " + 1.0 * sum / count);
         System.out.println("Even: " + even);
         System.out.println("Odd: " + odd);
     }
