@@ -20,18 +20,14 @@ public class PersonalInformationCollection {
             String lastName = scanner.nextLine();
 
             System.out.print("Identification number: ");
-            //String idNumber = scanner.nextLine();
-
-            //System.out.print("Enter the age of the person " + name + ": ");
 
             String identificationNumber = String.valueOf(scanner.nextLine());
             persons.add(new PersonalInformation(name, lastName, identificationNumber));
         }
-        
+
         System.out.println(" ");
         for (PersonalInformation person : persons) {
             System.out.println(person.getFirstName() + " " + person.getLastName());
         }
     }
 }
-//identificationNumber
