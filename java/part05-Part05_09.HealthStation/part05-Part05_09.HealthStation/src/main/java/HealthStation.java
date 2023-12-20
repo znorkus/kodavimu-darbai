@@ -15,6 +15,6 @@ public class HealthStation {
     }
 
     public int weighings() {
-    return counter;
+        return counter;
     }
 }
