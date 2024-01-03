@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="lt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Užpildykite forma:</h1>
+    <h2>Visi laukai privalomi.</h2>
+    <form>
+      <br />
+      <br />
+      <label for="fname"><b>Vardas (iš dižiosios raidės)</b></label
+      ><br />
+      <input
+        type="text"
+        pattern="[A-Za-z]+"
+        placeholder="Vardas"
+        id="fname"
+        required
+      />
+      <br />
+      <br />
+      <label for="tel"><b>Jūsų telefono numeris</b></label
+      ><br />
+      <input type="tel" placeholder="+370-xxx-xxxxx" id="tel" required />
+      <br />
+      <br />
+      <label for="email"><b>El. pašto adresas</b></label
+      ><br />
+      <input type="email" placeholder="el.p.adresas" id="email" required />
+      <br />
+      <br />
+      <label for="url"
+        ><b>Jūsų mėgstamiausios internetinės svetainės adresas:</b></label
+      ><br />
+      <input type="url" placeholder="url" id="url" required />
+      <br />
+      <br />
+      <label for="date"><b>Jūsų gimimo data:</b></label
+      ><br />
+      <input type="date" placeholder="yyyy-mm-dd" id="date" required />
+      <br />
+      <br />
+      <label for="number"><b>Jūsų amžius (18-65)</b></label
+      ><br />
+      <input
+        type="number"
+        pattern="[0-9]{18,65}"
+        placeholder="nuo 18 iki 65 metų"
+        id="number"
+        required
+      />
+      <br />
+      <br />
+      <label for="post-code"><b>Jūsų pašto kodas</b></label
+      ><br />
+      <input type="text" placeholder="xx-01234" id="post-code" required />
+      <br />
+      <br />
+      <label for="favcolor"><b>Jūsų mėgstamiausia spalva:</b></label>
+      <br />
+      <input
+        type="color"
+        id="favcolor"
+        name="favcolor"
+        value="#ff0000"
+      /><br /><br />
+      <input type="submit" value="Pateikti" />
+    </form>
+  </body>
+</html>
