@@ -18,6 +18,7 @@
         pattern="[A-Z][a-z]*"
         placeholder="Vardas"
         id="fname"
+        title="Vardas turi prasidėti didžiaja raide, ir būti sudarytas tik iš raidžių"
         required
       />
       <br />
@@ -29,32 +30,51 @@
         pattern="\+[0-9]{3}-[0-9]{3}-[0-9]{5}"
         placeholder="+370-xxx-xxxxx"
         id="tel"
+        title="Numerio pradžia turi būti Lietuvos kodas +370"
         required
       />
       <br />
       <br />
       <label for="email"><b>El. pašto adresas</b></label
       ><br />
-      <input type="email" placeholder="el.p.adresas" id="email" required />
+      <input
+        type="email"
+        placeholder="el.p.adresas"
+        id="email"
+        title="Čia turi būti tikslus jūsų el. pašto adresas"
+        required
+      />
       <br />
       <br />
       <label for="url"
         ><b>Jūsų mėgstamiausios internetinės svetainės adresas:</b></label
       ><br />
-      <input type="url" placeholder="url" id="url" required />
+      <input
+        type="url"
+        placeholder="url"
+        id="url"
+        title="Čia turi būti adresas į jūsų mėgstamiausią svetainę"
+        required
+      />
       <br />
       <br />
       <label for="date"><b>Jūsų gimimo data:</b></label
       ><br />
-      <input type="date" placeholder="yyyy-mm-dd" id="bdate" required />
+      <input
+        type="date"
+        title="Pasirinkite tikslią savo gimimo datą"
+        id="date"
+        required
+      />
       <br />
       <br />
-      <label for="number"><b>Jūsų amžius (18-65)</b></label
+      <label for="age"><b>Jūsų amžius (18-65)</b></label
       ><br />
       <input
         type="number"
         placeholder="nuo 18 iki 65 metų"
         id="age"
+        title="Pasirinkite tikslų savo amžių"
         min="18"
         max="65"
         required
@@ -67,6 +87,7 @@
         type="text"
         pattern="[A-Z]{2}-[0-9]{5}"
         placeholder="xx-01234"
+        title="Pašto kodas turi būti sudarytas iš raidinio šalies kodo ir penkių skaitmenų"
         id="post-code"
         required
       />
@@ -77,6 +98,7 @@
       <input
         type="color"
         id="favcolor"
+        title="Pasirinkite savo mėgstamiausią spalvą"
         name="favcolor"
         value="#ff0000"
       /><br /><br />
