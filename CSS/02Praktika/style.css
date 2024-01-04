@@ -38,6 +38,7 @@ body {
 */
 header {
   background: #16a085;
+  color: white;
 }
 
 /* <h1>, esantis <header> dalyje: 
@@ -106,7 +107,7 @@ header nav li {
     teksto spalva: balta;
 */
 
-a:link {
+header a:link {
   color: white;
 }
 
@@ -114,7 +115,7 @@ a:link {
     teksto spalva: balta;
 */
 
-a:visited {
+header a:visited {
   color: white;
 }
 
@@ -123,7 +124,7 @@ a:visited {
     tesktas pabrauktas;
 */
 
-a:hover {
+header a:hover {
   color: white;
   text-decoration: underline;
 }
@@ -132,7 +133,7 @@ a:hover {
     teksto spalva: pilka;
 */
 
-a:active {
+header a:active {
   color: gray;
 }
 
@@ -209,9 +210,10 @@ footer {
     teksto spalva: balta;
 */
 
-footer a {
+footer ul {
   text-decoration: none;
   color: white;
+  list-style-position: inside;
 }
 
 /* <h5>, esančio <footer> dalyje:
