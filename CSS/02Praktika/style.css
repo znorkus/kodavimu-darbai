@@ -46,11 +46,8 @@ header {
     vidinės paraštės (padding): 20px 0,
 */
 
-header {
+header h1 {
   padding: 20px 0;
-}
-
-h1 {
   text-transform: uppercase;
 }
 
