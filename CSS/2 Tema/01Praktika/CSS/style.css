@@ -18,4 +18,5 @@ li.active:before {
 li::before {
   content: "\2605  ";
   color: grey;
+  font-size: x-large;
 }
