@@ -1,9 +1,3 @@
-/*
-ul li:nth-child(4n) {
-  color: orange;
-}
-*/
-
 ul li:nth-child(4n + 3) {
   color: orange;
 }
