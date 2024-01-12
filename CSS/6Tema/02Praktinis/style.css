@@ -2,11 +2,15 @@ body {
   background-color: #ffe5d7;
 }
 
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .card {
   margin: 10px;
   text-align: center;
   width: 250px;
-  display: inline-block;
   background-color: white;
 }
 
