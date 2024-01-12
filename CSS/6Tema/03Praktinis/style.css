@@ -1,0 +1,27 @@
+body {
+  background-color: beige;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.main-card {
+  flex-basis: 500px;
+}
+
+.main-card__image {
+  width: 100%;
+}
+
+.mini-cards {
+  flex-basis: 500px;
+}
+
+.snippet__image {
+  width: 100px;
+  height: 100px;
+  float: left;
+}
