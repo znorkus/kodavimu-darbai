@@ -1,0 +1,9 @@
+.box {
+  background-image: url("./img/paukstis.png"), url("./img/grybas.png"),
+    url("./img/miskas.jpg");
+  height: 800px;
+  width: 800px;
+  background-repeat: no-repeat;
+  background-position: left top, right bottom, left top;
+  background-size: auto, auto, cover;
+}
