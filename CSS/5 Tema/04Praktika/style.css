@@ -1,0 +1,11 @@
+.meduse {
+  width: 600px;
+  border: 1px solid green;
+}
+
+.text-block {
+  position: absolute;
+  top: 340px;
+  left: 300px;
+  color: azure;
+}
