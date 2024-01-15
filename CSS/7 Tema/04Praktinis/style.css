@@ -1,0 +1,49 @@
+.container {
+  display: grid;
+  width: 100%;
+  height: 600px;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: 80px 150px 300px 80px;
+  grid-gap: 1rem;
+  grid-template-areas:
+    "header header header"
+    "aside content-1 content-1"
+    "content-2 content-2 content-3"
+    "footer footer footer";
+}
+
+.header {
+  grid-area: header;
+  background-color: rgb(43, 43, 74);
+  color: white;
+  padding: 20px;
+}
+
+.aside {
+  grid-area: aside;
+  background-color: rgb(214, 214, 214);
+}
+
+.content-1 {
+  grid-area: content-1;
+  background-color: rgb(95, 95, 95);
+  padding: 20px;
+}
+
+.content-2 {
+  grid-area: content-2;
+  background-color: rgb(95, 95, 95);
+  padding: 20px;
+}
+
+.content-3 {
+  grid-area: content-3;
+  background-color: rgb(214, 214, 214);
+}
+
+.footer {
+  grid-area: footer;
+  background-color: rgb(43, 43, 74);
+  color: white;
+  padding: 20px;
+}
