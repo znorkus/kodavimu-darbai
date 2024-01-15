@@ -1,0 +1,29 @@
+.grid-table {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px;
+  grid-template-rows: 70px 70px 70px 70px;
+  gap: 5px;
+  margin: 20px;
+}
+
+.header {
+  grid-column: 1 / 5;
+  background-color: darkblue;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.grid {
+  background-color: lightseagreen;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.footer {
+  grid-column: 1 / 5;
+  background-color: darkblue;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
