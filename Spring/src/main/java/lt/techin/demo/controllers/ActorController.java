@@ -1,7 +1,7 @@
 package lt.techin.demo.controllers;
 
 
-import lt.techin.demo.models.Actor;
+import lt.techin.demo.models.Actor;redundant
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +20,12 @@ public class ActorController {
 
 
     @GetMapping("/actors")
-    public ArrayList<Actor> getMovies() {
+    public ArrayList<Actor> getActors() {
         return this.actors;
     }
 
     @GetMapping("/actors/{index}")
-    public Actor getMovie(@PathVariable int index) {
+    public Actor getActor(@PathVariable int index) {
 
         return this.actors.get(index);
     }
