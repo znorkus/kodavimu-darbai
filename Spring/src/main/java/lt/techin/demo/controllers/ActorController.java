@@ -20,12 +20,12 @@ public class ActorController {
                             (short) 182, 120000L)));
 
 
-    @GetMapping("/movies")
+    @GetMapping("/actors")
     public ArrayList<Actor> getMovies() {
         return this.actors;
     }
 
-    @GetMapping("/movies/{index}")
+    @GetMapping("/actors/{index}")
     public Actor getMovie(@PathVariable int index) {
 
         return this.actors.get(index);
