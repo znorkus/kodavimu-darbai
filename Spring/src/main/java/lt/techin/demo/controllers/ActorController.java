@@ -26,7 +26,6 @@ public class ActorController {
 
     @GetMapping("/actors/{index}")
     public Actor getActors(@PathVariable int index) {
-
         return this.actors.get(index);
     }
 }
