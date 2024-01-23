@@ -21,13 +21,18 @@ public class MovieController {
         this.movieRepository = movieRepository;
     }
 
-    @GetMapping("/movies")
-    public List<Movie> getMovies() {
-        return this.movieRepository.findAll();
+    @GetMapping("/movies/{id}")
+    public Movie getMovie(@PathVariable long id) {
+        return this.movieRepository.findById(id).orElseThrow();
     }
 
-    @GetMapping("/movies/{index}")
-    public Movie getMovie(@PathVariable int index) {
-        return null;
-    }
+//    @GetMapping("/movies")
+//    public List<Movie> getMovies() {
+//        return this.movieRepository.findAll();
+//    }
+
+//    @GetMapping("/movies/{index}")
+//    public Movie getMovie(@PathVariable int index) {
+//        return null;
+//    }
 }
