@@ -2,30 +2,34 @@ package lt.techin.demo.controllers;
 
 
 import lt.techin.demo.models.Actor;
+import lt.techin.demo.repositories.ActorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class ActorController {
 
-    private ArrayList<Actor> actors = new ArrayList<>(
-            List.of(new Actor(1L, "Tim Allen", (short) 55,
-                            (short) 180, 100000L),
-                    new Actor(2L, "Tom Hanks", (short) 57,
-                            (short) 182, 120000L)));
+    private final ActorRepository actorRepository;
+
+    @Autowired
+    public ActorController(ActorRepository actorRepository) {
+        this.actorRepository = actorRepository;
+    }
 
 
     @GetMapping("/actors")
-    public ArrayList<Actor> getActors() {
-        return this.actors;
+    public List<Actor> getActors() {
+
+        return this.actorRepository.findAll();
     }
 
     @GetMapping("/actors/{index}")
     public Actor getActors(@PathVariable int index) {
-        return this.actors.get(index);
+
+        return null;
     }
 }
