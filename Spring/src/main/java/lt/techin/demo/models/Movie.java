@@ -2,8 +2,10 @@ package lt.techin.demo.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "Movies")
 public class Movie {
 
     @Id
@@ -20,6 +22,10 @@ public class Movie {
         this.director = director;
         this.yearRelease = yearRelease;
         this.lengthMinutes = lengthMinutes;
+
+    }
+
+    public Movie() {
 
     }
 
@@ -42,4 +48,6 @@ public class Movie {
     public short getLengthMinutes() {
         return lengthMinutes;
     }
+
 }
+
