@@ -2,6 +2,7 @@ package lt.techin.demo.controllers;
 
 
 import lt.techin.demo.models.Actor;
+import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +22,20 @@ public class ActorController {
     }
 
 
-    @GetMapping("/actors")
-    public List<Actor> getActors() {
+//    @GetMapping("/actors")
+//    public List<Actor> getActors() {
+//
+//        return this.actorRepository.findAll();
+//    }
 
-        return this.actorRepository.findAll();
+    @GetMapping("/actors/{id}")
+    public Actor getActor(@PathVariable long id) {
+        return this.actorRepository.findById(id).orElseThrow();
     }
-
-    @GetMapping("/actors/{index}")
-    public Actor getActors(@PathVariable int index) {
-
-        return null;
-    }
+//
+//    @GetMapping("/actors/{index}")
+//    public Actor getActors(@PathVariable int index) {
+//
+//        return null;
+//    }
 }
