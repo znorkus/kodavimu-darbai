@@ -31,16 +31,17 @@ public class ActorController {
 
     @PutMapping("/actors/{id}")
     public void updateActor(@RequestBody Actor actor, @PathVariable long id) {
-        Actor actorFromDb = this.actorRepository.findById(id).orElseThrow();
+        if (this.actorRepository.existsById(id)) {
+            Actor actorFromDb = this.actorRepository.findById(id).orElseThrow();
 
-        actorFromDb.setName(actor.getName());
-        actorFromDb.setAge(actor.getAge());
-        actorFromDb.setHeight(actor.getHeight());
-        actorFromDb.setSalary(actor.getSalary());
+            actorFromDb.setName(actor.getName());
+            actorFromDb.setAge(actor.getAge());
+            actorFromDb.setHeight(actor.getHeight());
+            actorFromDb.setSalary(actor.getSalary());
 
-        this.actorRepository.save(actorFromDb);
+            this.actorRepository.save(actorFromDb);
 
-        //    @GetMapping("/actors")
+            //    @GetMapping("/actors")
 //    public List<Actor> getActors() {
 //
 //        return this.actorRepository.findAll();
@@ -51,5 +52,6 @@ public class ActorController {
 //
 //        return null;
 //    }
+        }
     }
 }
