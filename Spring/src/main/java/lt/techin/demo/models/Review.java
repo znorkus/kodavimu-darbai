@@ -9,27 +9,29 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int movieId;
+    @ManyToOne
+    @JoinColumn(name = "Movie_id")
+    private int movie;
     private long userId;
     private String userName;
     private float userReviewRating;
     private String userReviewComment;
 
-    public Review(int movieId, long userId, String userName, float UserReviwRating,
+    public Review(int movie, long userId, String userName, float userReviewRating,
                   String userReviewComment) {
-        this.movieId = movieId;
+        this.movie = movie;
         this.userId = userId;
         this.userName = userName;
         this.userReviewRating = userReviewRating;
-        this.userReviewComment - userReviewComment;
+        this.userReviewComment = userReviewComment;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getMovieId() {
-        return movieId;
+    public int getMovie() {
+        return movie;
     }
 
     public long getUserId() {
@@ -48,8 +50,8 @@ public class Review {
         return userReviewComment;
     }
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
+    public void setMovie(int movie) {
+        this.movie = movie;
     }
 
     public void setUserId(long userId) {
