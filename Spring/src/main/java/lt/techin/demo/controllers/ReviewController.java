@@ -31,7 +31,7 @@ public class ReviewController {
     }
 
     @PostMapping("/reviews")
-    public void insertReview(@RequestBody Review review) {
+    public Review insertReview(@RequestBody Review review) {
         this.reviewRepository.save(review);
     }
 
@@ -53,8 +53,8 @@ public class ReviewController {
     }
 
     @DeleteMapping("/reviews/{id}")
-    public void deleteReview(@PathVariable long id) {
+    public Review deleteReview(@PathVariable long id) {
         this.reviewRepository.deleteById(id);
     }
-    
+
 }
