@@ -53,5 +53,7 @@ public class ActorController {
 //        return null;
 //    }
         }
+
+        this.actorRepository.save(actor);
     }
 }
