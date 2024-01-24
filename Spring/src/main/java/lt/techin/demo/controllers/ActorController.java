@@ -2,12 +2,11 @@ package lt.techin.demo.controllers;
 
 
 import lt.techin.demo.models.Actor;
-import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+//import java.util.List;
 
 @RestController
 public class ActorController {
@@ -30,7 +29,18 @@ public class ActorController {
         this.actorRepository.save(actor);
     }
 
-    //    @GetMapping("/actors")
+    @PutMapping("/actors/{id}")
+    public void updateActor(@RequestBody Actor actor, @PathVariable long id) {
+        Actor actorFromDb = this.actorRepository.findById(id).orElseThrow();
+
+        actorFromDb.setName(actor.getName());
+        actorFromDb.setAge(actor.getAge());
+        actorFromDb.setHeight(actor.getHeight());
+        actorFromDb.setSalary(actor.getSalary());
+
+        this.actorRepository.save(actorFromDb);
+
+        //    @GetMapping("/actors")
 //    public List<Actor> getActors() {
 //
 //        return this.actorRepository.findAll();
@@ -41,4 +51,5 @@ public class ActorController {
 //
 //        return null;
 //    }
+    }
 }
