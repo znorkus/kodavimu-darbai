@@ -45,6 +45,8 @@ public class MovieController {
 
             this.movieRepository.save(movieFromDb);
         }
+
+        this.movieRepository.save(movie);
     }
 }
 //    @GetMapping("/movies")
