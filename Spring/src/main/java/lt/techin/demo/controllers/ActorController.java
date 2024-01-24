@@ -30,7 +30,7 @@ public class ActorController {
     }
 
     @PutMapping("/actors/{id}")
-    public void updateActor(@RequestBody Actor actor, @PathVariable long id) {
+    public Actor updateActor(@RequestBody Actor actor, @PathVariable long id) {
         if (this.actorRepository.existsById(id)) {
             Actor actorFromDb = this.actorRepository.findById(id).orElseThrow();
 
@@ -39,21 +39,9 @@ public class ActorController {
             actorFromDb.setHeight(actor.getHeight());
             actorFromDb.setSalary(actor.getSalary());
 
-            this.actorRepository.save(actorFromDb);
-
-            //    @GetMapping("/actors")
-//    public List<Actor> getActors() {
-//
-//        return this.actorRepository.findAll();
-//    }
-//
-//    @GetMapping("/actors/{index}")
-//    public Actor getActors(@PathVariable int index) {
-//
-//        return null;
-//    }
+            return this.actorRepository.save(actorFromDb);
         }
 
-        this.actorRepository.save(actor);
+        return this.actorRepository.save(actor);
     }
 }
