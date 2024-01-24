@@ -1,16 +1,17 @@
 package lt.techin.demo.controllers;
 
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+//import jakarta.persistence.GeneratedValue;
+//import jakarta.persistence.GenerationType;
+//import jakarta.persistence.Id;
+
 import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
 @RestController
 public class MovieController {
@@ -34,6 +35,7 @@ public class MovieController {
 
     @PutMapping("/movies/{id}")
     public void updateMovie(@RequestBody Movie movie, @PathVariable long id) {
+        if (this.movieRepository.existsById(id)) {
         Movie movieFromDb = this.movieRepository.findById(id).orElseThrow();
 
         movieFromDb.setDirector(movie.getDirector());
