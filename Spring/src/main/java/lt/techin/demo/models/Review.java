@@ -11,13 +11,13 @@ public class Review {
     private int id;
     @ManyToOne
     @JoinColumn(name = "Movie_id")
-    private int movie;
+    private Movie movie;
     private long userId;
     private String userName;
     private float userReviewRating;
     private String userReviewComment;
 
-    public Review(int movie, long userId, String userName, float userReviewRating,
+    public Review(Movie movie, long userId, String userName, float userReviewRating,
                   String userReviewComment) {
         this.movie = movie;
         this.userId = userId;
@@ -26,11 +26,15 @@ public class Review {
         this.userReviewComment = userReviewComment;
     }
 
+    public Review() {
+
+    }
+
     public int getId() {
         return id;
     }
 
-    public int getMovie() {
+    public Movie getMovie() {
         return movie;
     }
 
@@ -50,7 +54,7 @@ public class Review {
         return userReviewComment;
     }
 
-    public void setMovie(int movie) {
+    public void setMovie(Movie movie) {
         this.movie = movie;
     }
 
