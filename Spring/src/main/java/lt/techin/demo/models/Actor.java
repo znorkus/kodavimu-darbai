@@ -45,5 +45,21 @@ public class Actor {
     public long getSalary() {
         return salary;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setSalary(long salary) {
+        this.salary = salary;
+    }
 }
 
