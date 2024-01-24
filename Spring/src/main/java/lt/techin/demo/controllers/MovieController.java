@@ -1,6 +1,9 @@
 package lt.techin.demo.controllers;
 
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,18 @@ public class MovieController {
     @PostMapping("/movies")
     public void insertMovie(@RequestBody Movie movie) {
         this.movieRepository.save(movie);
+    }
+
+    @PutMapping("/movies/{id}")
+    public void updateMovie(@RequestBody Movie movie, @PathVariable long id) {
+        Movie movieFromDb = this.movieRepository.findById(id).orElseThrow();
+
+        movieFromDb.setDirector(movie.getDirector());
+        movieFromDb.setTitle(movie.getTitle());
+        movieFromDb.setLengthMinutes(movie.getLengthMinutes());
+        movieFromDb.setYearRelease(movie.getLengthMinutes());
+
+        this.movieRepository.save(movieFromDb);
     }
 }
 //    @GetMapping("/movies")
