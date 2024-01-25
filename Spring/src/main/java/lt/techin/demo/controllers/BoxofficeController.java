@@ -2,7 +2,6 @@ package lt.techin.demo.controllers;
 
 
 import lt.techin.demo.models.Boxoffice;
-import lt.techin.demo.models.Review;
 import lt.techin.demo.repositories.BoxofficeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +21,7 @@ public class BoxofficeController {
     }
 
     @GetMapping("/boxoffice")
-    public List<Boxoffice> getMovies() {
+    public List<Boxoffice> getBoxoffice() {
         return this.boxofficeRepository.findAll();
     }
 
