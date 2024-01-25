@@ -25,7 +25,7 @@ public class ActorController {
     }
 
     @PostMapping("/actors")
-    public Actor insertActor(@RequestBody Actor actor) {
+    public void insertActor(@RequestBody Actor actor) {
         this.actorRepository.save(actor);
     }
 
