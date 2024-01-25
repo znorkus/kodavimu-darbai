@@ -12,18 +12,26 @@ import java.util.List;
 public class MovieService {
 
     private final MovieRepository movieRepository;
+    private MovieService movieService;
 
     @Autowired
     public MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
 
-    public List<Movie> findAll() {
+    public List<Movie> findAllMovies() {
         return this.movieRepository.findAll();
     }
 
-    public Movie findById(long id) {
+    public Movie findMovieById(long id) {
         return this.movieRepository.findById(id).orElseThrow();
     }
 
+    public Movie saveMovie(Movie movie) {
+        return this.movieRepository.save(movie);
+    }
+
+    public boolean existsMovieById(long id) {
+        return this.movieRepository.existsById(id);
+    }
 }
