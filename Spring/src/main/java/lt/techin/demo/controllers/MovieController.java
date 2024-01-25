@@ -30,7 +30,7 @@ public class MovieController {
 
     @PostMapping("/movies")
     public Movie insertMovie(@RequestBody Movie movie) {
-        this.movieRepository.save(movie);
+        return this.movieRepository.save(movie);
     }
 
     @PutMapping("/movies/{id}")
