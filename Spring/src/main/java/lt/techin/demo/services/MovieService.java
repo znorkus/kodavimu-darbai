@@ -34,4 +34,8 @@ public class MovieService {
     public boolean existsMovieById(long id) {
         return this.movieRepository.existsById(id);
     }
+
+    public void deleteMovieById(long id) {
+        this.movieRepository.deleteById(id);
+    }
 }
