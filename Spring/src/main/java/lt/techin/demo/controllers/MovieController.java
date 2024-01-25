@@ -1,56 +1,22 @@
 package lt.techin.demo.controllers;
 
-
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.GenerationType;
-//import jakarta.persistence.Id;
-
 import lt.techin.demo.models.Movie;
-import lt.techin.demo.repositories.MovieRepository;
+import lt.techin.demo.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-//import java.util.ArrayList;
-//import java.util.List;
 
 @RestController
 public class MovieController {
 
-    private final MovieRepository movieRepository;
+    private final MovieService movieService;
 
     @Autowired
-    public MovieController(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    public MovieController(MovieService movieService) {
+        this.movieService = movieService;
     }
 
     @GetMapping("/movies/{id}")
     public Movie getMovie(@PathVariable long id) {
-        return this.movieRepository.findById(id).orElseThrow();
-    }
-
-    @PostMapping("/movies")
-    public Movie insertMovie(@RequestBody Movie movie) {
-        return this.movieRepository.save(movie);
-    }
-
-    @PutMapping("/movies/{id}")
-    public Movie updateMovie(@RequestBody Movie movie, @PathVariable long id) {
-        if (this.movieRepository.existsById(id)) {
-            Movie movieFromDb = this.movieRepository.findById(id).orElseThrow();
-
-            movieFromDb.setDirector(movie.getDirector());
-            movieFromDb.setTitle(movie.getTitle());
-            movieFromDb.setLengthMinutes(movie.getLengthMinutes());
-            movieFromDb.setYearRelease(movie.getLengthMinutes());
-
-            return this.movieRepository.save(movieFromDb);
-        }
-
-        return this.movieRepository.save(movie);
-    }
-
-    @DeleteMapping("/movies/{id}")
-    public void deleteMovie(@PathVariable long id) {
-        this.movieRepository.deleteById(id);
+        return this.movieService.findById(id);
     }
 }
