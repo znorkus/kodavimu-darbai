@@ -63,7 +63,7 @@ public class MovieServiceTest {
     @Test
     void saveMovie_saveIt_thenReturn() {
         Movie savedMovie = this.movieService
-                .saveMovie(new Movie("Mr. Bean", "Rowant Atkinson", (short) 2019, (short) 97));
+                .saveMovie(new Movie("Mr. Bean", "Rowan Atkinson", (short) 2019, (short) 97));
 
         Movie foundMovie = this.movieRepository
                 .findById(savedMovie.getId()).orElse(null);
