@@ -80,4 +80,14 @@ public class MovieServiceTest {
 
         then(existsMovie).isTrue();
     }
+
+    @Test
+    void deleteMovieById_delete_cannotFind() {
+        Movie savedMovie = this.movieRepository.save(new Movie("Broken Flowers",
+                "Jim Jarmusch", (short) 2005, (short) 101));
+        this.movieService.deleteMovieById(savedMovie.getId());
+
+        then(this.movieRepository.existsById(savedMovie.getId())).isFalse();
+    }
+
 }
