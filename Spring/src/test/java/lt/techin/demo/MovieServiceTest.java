@@ -26,7 +26,7 @@ public class MovieServiceTest {
     private MovieService movieService;
 
     @Test
-        //given
+        //Given
     void findAllMovies_saveMovies_returned() {
         Movie savedMovie1 = movieRepository.save(new Movie("Madagascar", "Stephen Spielberg", (short) 2005,
                 (short) 60));
@@ -35,24 +35,7 @@ public class MovieServiceTest {
         //When
         List<Movie> movies = this.movieService.findAllMovies();
 //Then
-        then(movies.get(0).getTitle())
-                .isEqualTo(savedMovie1.getTitle());
-        then(movies.get(0).getDirector())
-                .isEqualTo(savedMovie1.getDirector());
-        then(movies.get(0).getYearRelease())
-                .isEqualTo(savedMovie1.getYearRelease());
-        then(movies.get(0).getLengthMinutes())
-                .isEqualTo(savedMovie1.getLengthMinutes());
-
-        then(movies.get(1).getTitle())
-                .isEqualTo(savedMovie2.getTitle());
-        then(movies.get(1).getDirector())
-                .isEqualTo(savedMovie2.getDirector());
-        then(movies.get(1).getYearRelease())
-                .isEqualTo(savedMovie2.getYearRelease());
-        then(movies.get(1).getLengthMinutes())
-                .isEqualTo(savedMovie2.getLengthMinutes());
-
+        then(movies).containsExactly(savedMovie1, savedMovie2);
 
     }
 
