@@ -11,8 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.BDDAssertions.then;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -50,5 +52,13 @@ public class MovieServiceTest {
 //Then
         then(movieFromDb).isEqualTo(savedMovie1);
 
+    }
+
+    @Test
+    void findMovieById_findNotExistent_throwError() {
+        Throwable throwable = catchThrowable(
+                () -> this.movieService.findMovieById(1));
+
+        then(throwable).isInstanceOf(NoSuchElementException.class);
     }
 }
