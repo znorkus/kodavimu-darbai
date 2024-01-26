@@ -11,13 +11,11 @@ import java.util.List;
 public class ActorService {
 
     private final ActorRepository actorRepository;
-    private final ActorService actorService;
 
     @Autowired
-    public ActorService(ActorRepository actorRepository, ActorService actorService) {
+    public ActorService(ActorRepository actorRepository) {
 
         this.actorRepository = actorRepository;
-        this.actorService = actorService;
     }
 
     public List<Actor> getAllActors() {
@@ -39,7 +37,7 @@ public class ActorService {
 
     }
 
-    public void deleteMovieById(long id) {
+    public void deleteActorById(long id) {
         this.actorRepository.deleteById(id);
     }
 }
