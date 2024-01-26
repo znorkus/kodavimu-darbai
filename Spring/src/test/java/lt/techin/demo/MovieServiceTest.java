@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.MovieRepository;
 import lt.techin.demo.services.MovieService;
-import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -60,5 +58,14 @@ public class MovieServiceTest {
                 () -> this.movieService.findMovieById(1));
 
         then(throwable).isInstanceOf(NoSuchElementException.class);
+    }
+
+    @Test
+    void saveMovie_saveIt_thenReturn() {
+        Movie savedMovie = this.movieService
+                .saveMovie(new Movie("Mr. Bean", "Rowant Atkinson", (short) 2019, (short) 97));
+
+        Movie foundMovie = this.movieRepository
+                .findById(savedMovie.getId()).orElse(null);
     }
 }
