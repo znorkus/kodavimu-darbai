@@ -39,4 +39,16 @@ public class MovieServiceTest {
 
     }
 
+    @Test
+    void findMovieById_saveMovies_returned() {
+        Movie savedMovie1 = movieRepository.save(new Movie("Madagascar", "Stephen Spielberg", (short) 2005,
+                (short) 60));
+        Movie savedMovie2 = movieRepository.save(new Movie("Home Alone", "Stephen Spielberg", (short) 1999,
+                (short) 120));
+        //When
+        Movie movieFromDb = this.movieService.findMovieById(savedMovie1.getId());
+//Then
+        then(movieFromDb).isEqualTo(savedMovie1);
+
+    }
 }
