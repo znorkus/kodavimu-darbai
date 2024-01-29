@@ -10,10 +10,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -77,7 +77,7 @@ public class MovieControllerTest {
     void updateMovie_whenUpdateFields_thenReturn() throws Exception {
         //given
         Movie existingMovie = new Movie("Existing Movie", "Director A", (short) 2020, (short) 120);
-        Movie updateMovie = new Movie("Updated Movie", "Director B", (short) 2022, (short) 150);
+        Movie updateMovie = new Movie("Update Movie", "Director B", (short) 2022, (short) 150);
 
         given(this.movieService.existsMovieById(anyLong())).willReturn(true);
         given(this.movieService.findMovieById(anyLong())).willReturn(existingMovie);
@@ -93,11 +93,17 @@ public class MovieControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Update Movie"))
                 .andExpect(jsonPath("$.director").value("Director B"))
-                .andExpect(jsonPath("$.dyearRelease").value(2022))
+                .andExpect(jsonPath("$.yearRelease").value(2022))
                 .andExpect(jsonPath("$.lengthMinutes").value(150));
 
         verify(this.movieService).existsMovieById(1L);
         verify(this.movieService).findMovieById(1L);
-        verify(this.movieService).saveMovie(argThat(movie -> movie.getTitle().equals("Update Movie")));
+        verify(this.movieService).saveMovie(argThat(m -> {
+            assertThat(m.getTitle()).isEqualTo("Update Movie");
+            assertThat(m.getDirector()).isEqualTo("Director B");
+            assertThat(m.getYearRelease()).isEqualTo((short) 2022);
+            assertThat(m.getLengthMinutes()).isEqualTo((short) 150);
+            return true;
+        }));
     }
 }
