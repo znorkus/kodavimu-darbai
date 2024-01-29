@@ -151,4 +151,22 @@ public class MovieControllerTest {
 
         verify(this.movieService).deleteMovieById(movieId);
     }
+
+    @Test
+    void getMovie_whenFindMovie_thenReturn() throws Exception {
+
+        Movie movie = new Movie("Delivery Man", "Ken Scott", (short) 2013, (short) 105);
+        //given
+        given(this.movieService.findMovieById(1L))
+                .willReturn(movie);
+
+        mockMvc.perform(get("/movies/{id}", 1L))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Delivery Man"))
+                .andExpect(jsonPath("$.director").value("Ken Scott"))
+                .andExpect(jsonPath("$.yearRelease").value(2013))
+                .andExpect(jsonPath("$.lengthMinutes").value(105));
+
+        verify(this.movieService).findMovieById(1L);
+    }
 }
