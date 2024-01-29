@@ -157,7 +157,7 @@ public class MovieControllerTest {
 
         Movie movie = new Movie("Delivery Man", "Ken Scott", (short) 2013, (short) 105);
         //given
-        given(this.movieService.findMovieById(1L))
+        given(this.movieService.findMovieById(anyLong()))
                 .willReturn(movie);
 
         mockMvc.perform(get("/movies/{id}", 1L))
