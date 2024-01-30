@@ -1,6 +1,7 @@
 package lt.techin.demo;
 
 import jakarta.transaction.Transactional;
+import lt.techin.demo.models.Actor;
 import lt.techin.demo.models.Boxoffice;
 import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.BoxofficeRepository;
@@ -42,6 +43,21 @@ public class BoxofficeServiceTest {
         List<Boxoffice> boxoffices = this.boxofficeService.getAllBoxoffices();
         //Then
         then(boxoffices).containsExactly(savedBoxoffice1, savedBoxoffice2);
+
+    }
+
+    @Test
+        //Given
+    void findBoxofficeById_saveBoxoffices_returned() {
+        Movie movie = this.movieService.saveMovie(new Movie
+                ("Test Film", "Stiven Spilberg", (short) 2020, (short) 120));
+
+        Boxoffice savedBoxoffice1 = boxofficeRepository.save(new Boxoffice
+                (movie, 8.5F, 5000000L, 10000000L));
+
+        //When
+        Movie movieFromDb = this.boxofficeService.findMovieById(boxoffice.getId());
+
 
     }
 }
