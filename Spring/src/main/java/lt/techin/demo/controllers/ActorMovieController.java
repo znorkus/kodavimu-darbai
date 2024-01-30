@@ -10,6 +10,8 @@ import lt.techin.demo.services.ActorService;
 import lt.techin.demo.services.MovieService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ActorMovieController {
 
@@ -22,6 +24,11 @@ public class ActorMovieController {
         this.actorMovieRepository = actorMovieRepository;
         this.actorService = actorService;
         this.movieService = movieService;
+    }
+
+    @GetMapping("/actorsmovies")
+    public List<ActorMovie> getActorsMovies() {
+        return this.actorMovieRepository.findAll();
     }
 
     @GetMapping("/actors/{actorId}/movies/{movieId}")
