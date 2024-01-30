@@ -3,6 +3,7 @@ package lt.techin.demo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.techin.demo.controllers.ActorController;
 import lt.techin.demo.models.Actor;
+import lt.techin.demo.models.Movie;
 import lt.techin.demo.services.ActorService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -71,5 +72,39 @@ public class ActorControllerTest {
                 .andExpect(jsonPath("$.salary").value(100000));
 
         verify(this.actorService).saveActor(any(Actor.class));
+    }
+
+    @Test
+    void updateActor_whenUpdateFields_thenReturn() throws Exception {
+        //given
+        Actor existingActor = new Actor("Existing Actor", (short) 60, (short) 180, 50000L);
+        Actor updateActor = new Actor("Update Actor", (short) 55, (short) 200, 55000L);
+
+        given(this.actorService.existsActorById(anyLong())).willReturn(true);
+        given(this.actorService.findActorById(anyLong())).willReturn(existingActor);
+        given(this.actorService.saveActor(any(Actor.class))).willReturn(updateActor);
+
+        //when
+        mockMvc.perform(put("/actors/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(updateActor))
+                        .accept(MediaType.APPLICATION_JSON))
+
+                //then
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Update Actor"))
+                .andExpect(jsonPath("$.age").value(55))
+                .andExpect(jsonPath("$.height").value(200))
+                .andExpect(jsonPath("$.salary").value(55000));
+
+        verify(this.actorService).existsActorById(1L);
+        verify(this.actorService).findActorById(1L);
+        verify(this.actorService).saveActor(argThat(a -> {
+            assertThat(a.getName()).isEqualTo("Update Actor");
+            assertThat(a.getAge()).isEqualTo(55);
+            assertThat(a.getHeight()).isEqualTo(200);
+            assertThat(a.getSalary()).isEqualTo(55000);
+            return true;
+        }));
     }
 }
