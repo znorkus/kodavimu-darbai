@@ -148,4 +148,22 @@ public class ActorControllerTest {
 
         verify(this.actorService).deleteActorById(actorId);
     }
+
+    @Test
+    void getActor_whenFindActor_thenReturn() throws Exception {
+
+        Actor actor = new Actor("Tom Hanks", (short) 65, (short) 180, 100000L);
+        //given
+        given(this.actorService.findActorById(anyLong()))
+                .willReturn(actor);
+
+        mockMvc.perform(get("/actors/{id}", 1L))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Tom Hanks"))
+                .andExpect(jsonPath("$.age").value(65))
+                .andExpect(jsonPath("$.height").value(180))
+                .andExpect(jsonPath("$.salary").value(100000));
+
+        verify(this.actorService).findActorById(1L);
+    }
 }
