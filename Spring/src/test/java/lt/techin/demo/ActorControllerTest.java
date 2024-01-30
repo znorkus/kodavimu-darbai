@@ -3,7 +3,7 @@ package lt.techin.demo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.techin.demo.controllers.ActorController;
 import lt.techin.demo.models.Actor;
-import lt.techin.demo.models.Movie;
+import lt.techin.demo.models.Actor;
 import lt.techin.demo.services.ActorService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -106,5 +107,33 @@ public class ActorControllerTest {
             assertThat(a.getSalary()).isEqualTo(55000);
             return true;
         }));
+    }
+
+    @Test
+    void updateActor_whenNoActorFound_addNewOne() throws Exception {
+        //give
+        Actor newActor = new Actor("New Actor", (short) 77, (short) 215, 85000L);
+
+        given(this.actorService.existsActorById(anyLong())).willReturn(false);
+        given(this.actorService.saveActor(any(Actor.class)))
+                .willReturn(newActor);
+
+        //when
+        mockMvc.perform(put("/actors/{id}", 33)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(newActor))
+                        .accept(MediaType.APPLICATION_JSON))
+
+                //then
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("New Actor"))
+                .andExpect(jsonPath("$.age").value(77))
+                .andExpect(jsonPath("$.height").value(215))
+                .andExpect(jsonPath("$.salary").value(85000));
+
+        verify(this.actorService).existsActorById(33L);
+        verify(this.actorService, never()).findActorById(anyLong());
+        verify(this.actorService).saveActor(argThat(persistedActor -> persistedActor.getName().equals("New Actor")));
+
     }
 }
