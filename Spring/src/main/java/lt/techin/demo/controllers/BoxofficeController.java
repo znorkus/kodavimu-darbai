@@ -20,12 +20,12 @@ public class BoxofficeController {
         this.boxofficeRepository = boxofficeRepository;
     }
 
-    @GetMapping("/boxoffice")
+    @GetMapping("/boxoffices")
     public List<Boxoffice> getBoxoffice() {
         return this.boxofficeRepository.findAll();
     }
 
-    @GetMapping("/boxoffice/{id}")
+    @GetMapping("/boxoffices/{id}")
     public Boxoffice getBoxoffice(@PathVariable long id) {
         return this.boxofficeRepository.findById(id).orElseThrow();
     }
