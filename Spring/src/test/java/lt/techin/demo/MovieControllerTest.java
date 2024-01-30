@@ -2,7 +2,6 @@ package lt.techin.demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.techin.demo.controllers.MovieController;
-import lt.techin.demo.models.Actor;
 import lt.techin.demo.models.Movie;
 import lt.techin.demo.services.MovieService;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
