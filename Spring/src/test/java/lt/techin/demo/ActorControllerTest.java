@@ -3,7 +3,6 @@ package lt.techin.demo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.techin.demo.controllers.ActorController;
 import lt.techin.demo.models.Actor;
-import lt.techin.demo.models.Actor;
 import lt.techin.demo.services.ActorService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,5 +134,18 @@ public class ActorControllerTest {
         verify(this.actorService, never()).findActorById(anyLong());
         verify(this.actorService).saveActor(argThat(persistedActor -> persistedActor.getName().equals("New Actor")));
 
+    }
+
+    @Test
+    void deleteActor_whenExistingActor() throws Exception {
+        // Given
+        long actorId = 1L;
+
+        // When
+        mockMvc.perform(delete("/actors/{id}", actorId))
+                // Then
+                .andExpect(status().isOk());
+
+        verify(this.actorService).deleteActorById(actorId);
     }
 }
