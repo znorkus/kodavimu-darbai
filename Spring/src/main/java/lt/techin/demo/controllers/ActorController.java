@@ -33,8 +33,8 @@ public class ActorController {
     }
 
     @PostMapping("/actors")
-    public void insertActor(@RequestBody Actor actor) {
-        this.actorService.saveActor(actor);
+    public Actor insertActor(@RequestBody Actor actor) {
+        return this.actorService.saveActor(actor);
     }
 
     @PutMapping("/actors/{id}")
