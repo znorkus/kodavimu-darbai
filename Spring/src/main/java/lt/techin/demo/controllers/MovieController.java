@@ -38,13 +38,15 @@ public class MovieController {
                         .path("/{id}").buildAndExpand(savedMovie.getId())
                         .toUri())
                 .body(savedMovie);
+
     }
 //    public Movie insertMovie(@RequestBody Movie movie) {
 //        return this.movieService.saveMovie(movie);
 //    }
 
     @PutMapping("/movies/{id}")
-    public Movie updateMovie(@RequestBody Movie movie, @PathVariable long id) {
+//    public Movie updateMovie(@RequestBody Movie movie, @PathVariable long id) {
+    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie, @PathVariable long id) {
         if (this.movieService.existsMovieById(id)) {
             Movie movieFromDb = this.movieService.findMovieById(id);
 
@@ -53,9 +55,15 @@ public class MovieController {
             movieFromDb.setLengthMinutes(movie.getLengthMinutes());
             movieFromDb.setYearRelease(movie.getYearRelease());
 
-            return this.movieService.saveMovie(movieFromDb);
+            this.movieService.saveMovie(movieFromDb);
+            return ResponseEntity.ok(movieFromDb);
         }
-        return this.movieService.saveMovie(movie);
+        Movie updatedMovie = this.movieService.saveMovie(movie);
+
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
+                        .path("/{id}").buildAndExpand(updatedMovie.getId())
+                        .toUri())
+                .body(updatedMovie);
     }
 
     @DeleteMapping("/movies/{id}")
