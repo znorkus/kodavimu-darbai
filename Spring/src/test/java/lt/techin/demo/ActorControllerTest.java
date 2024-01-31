@@ -65,7 +65,7 @@ public class ActorControllerTest {
                         .content(new ObjectMapper().writeValueAsString(actor)))
 
                 //then
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name").value("Tom Hanks"))
                 .andExpect(jsonPath("$.age").value(65))
                 .andExpect(jsonPath("$.height").value(180))
