@@ -6,7 +6,9 @@ import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.ActorRepository;
 import lt.techin.demo.services.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -33,9 +35,18 @@ public class ActorController {
     }
 
     @PostMapping("/actors")
-    public Actor insertActor(@RequestBody Actor actor) {
-        return this.actorService.saveActor(actor);
+    public ResponseEntity<Actor> insertActor(@RequestBody Actor actor) {
+        Actor savedActor = this.actorService.saveActor(actor);
+
+        return ResponseEntity
+                .created(ServletUriComponentsBuilder.fromCurrentRequest()
+                        .path("/{id}").buildAndExpand(savedActor.getId())
+                        .toUri())
+                .body(savedActor);
     }
+//    public Actor insertActor(@RequestBody Actor actor) {
+//        return this.actorService.saveActor(actor);
+//    }
 
     @PutMapping("/actors/{id}")
     public Actor updateActor(@RequestBody Actor actor, @PathVariable long id) {
