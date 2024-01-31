@@ -41,7 +41,7 @@ public class ActorMovieController {
         return this.actorMovieRepository.findById(actorMovieId).orElse(null);
     }
 
-    @PostMapping("/actormovies")
+    @PostMapping("/actorsmovies")
     public ActorMovie saveActorMovie(@RequestBody ActorMovie actorMovie) {
         return this.actorMovieRepository.save(actorMovie);
     }
