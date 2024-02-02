@@ -53,7 +53,7 @@ public class MovieController {
             movieFromDb.setDirector(movie.getDirector());
             movieFromDb.setTitle(movie.getTitle());
             movieFromDb.setLengthMinutes(movie.getLengthMinutes());
-            movieFromDb.setYearRelease(movie.getYearRelease());
+            movieFromDb.setDateRelease(movie.getDateRelease());
 
             this.movieService.saveMovie(movieFromDb);
             return ResponseEntity.ok(movieFromDb);
@@ -69,9 +69,12 @@ public class MovieController {
     @DeleteMapping("/movies/{id}")
 //    public void deleteMovie(@PathVariable long id) {
 //        this.movieService.deleteMovieById(id);
-    public ResponseEntity<Movie> deleteMovie(@PathVariable long id) {
-        this.movieService.deleteMovieById(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> deleteMovie(@PathVariable long id) {
+        if (this.movieService.existsMovieById(id)) {
+            this.movieService.deleteMovieById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }
