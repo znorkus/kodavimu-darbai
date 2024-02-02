@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -34,8 +35,8 @@ public class MovieControllerTest {
     void getMovies_saveMovies_returnAll() throws Exception {
         given(this.movieService.findAllMovies())
                 .willReturn(List.of(new Movie
-                                ("Bad Boys", "Will Smith", (short) 2008, (short) 110),
-                        new Movie("300", "Steaven Spilberg", (short) 2005, (short) 120)));
+                                ("Bad Boys", "Will Smith", LocalDate.of(2005, 1, 1), (short) 110),
+                        new Movie("300", "Steaven Spilberg", LocalDate.of(2006, 1, 1), (short) 120)));
         mockMvc.perform(get("/movies"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].title")
@@ -55,7 +56,7 @@ public class MovieControllerTest {
     @Test
     void insertMovie_whenSaveMovie_thenReturnIt() throws Exception {
         //given
-        Movie movie = new Movie("Delivery Man", "Ken Scott", (short) 2013, (short) 105);
+        Movie movie = new Movie("Delivery Man", "Ken Scott", LocalDate.of(2013, 1, 1), (short) 105);
         given(this.movieService.saveMovie(any(Movie.class))).willReturn(movie);
 
         //when
@@ -77,8 +78,8 @@ public class MovieControllerTest {
     @Test
     void updateMovie_whenUpdateFields_thenReturn() throws Exception {
         //given
-        Movie existingMovie = new Movie("Existing Movie", "Director A", (short) 2020, (short) 120);
-        Movie updateMovie = new Movie("Update Movie", "Director B", (short) 2022, (short) 150);
+        Movie existingMovie = new Movie("Existing Movie", "Director A", LocalDate.of(2020, 1, 1), (short) 120);
+        Movie updateMovie = new Movie("Update Movie", "Director B", LocalDate.of(2022, 1, 1), (short) 150);
 
         given(this.movieService.existsMovieById(anyLong())).willReturn(true);
         given(this.movieService.findMovieById(anyLong())).willReturn(existingMovie);
@@ -102,7 +103,7 @@ public class MovieControllerTest {
         verify(this.movieService).saveMovie(argThat(m -> {
             assertThat(m.getTitle()).isEqualTo("Update Movie");
             assertThat(m.getDirector()).isEqualTo("Director B");
-            assertThat(m.getYearRelease()).isEqualTo((short) 2022);
+            assertThat(m.getDateRelease()).isEqualTo((short) 2022);
             assertThat(m.getLengthMinutes()).isEqualTo((short) 150);
             return true;
         }));
@@ -111,7 +112,7 @@ public class MovieControllerTest {
     @Test
     void updateMovie_whenNoMovieFound_addNewOne() throws Exception {
         //give
-        Movie newMovie = new Movie("New Movie", "Director C", (short) 2023, (short) 180);
+        Movie newMovie = new Movie("New Movie", "Director C", LocalDate.of(2023, 1, 1), (short) 180);
 
         given(this.movieService.existsMovieById(anyLong())).willReturn(false);
         given(this.movieService.saveMovie(any(Movie.class)))
@@ -145,7 +146,7 @@ public class MovieControllerTest {
         // When
         mockMvc.perform(delete("/movies/{id}", movieId))
                 // Then
-                .andExpect(status().isOk());
+                .andExpect(status().isNotFound());
 
         verify(this.movieService).deleteMovieById(movieId);
     }
@@ -153,7 +154,7 @@ public class MovieControllerTest {
     @Test
     void getMovie_whenFindMovie_thenReturn() throws Exception {
 
-        Movie movie = new Movie("Delivery Man", "Ken Scott", (short) 2013, (short) 105);
+        Movie movie = new Movie("Delivery Man", "Ken Scott", LocalDate.of(2013, 1, 1), (short) 105);
         //given
         given(this.movieService.findMovieById(anyLong()))
                 .willReturn(movie);
