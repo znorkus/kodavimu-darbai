@@ -2,8 +2,6 @@ package lt.techin.demo.controllers;
 
 
 import lt.techin.demo.models.Actor;
-import lt.techin.demo.models.Movie;
-import lt.techin.demo.repositories.ActorRepository;
 import lt.techin.demo.services.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
