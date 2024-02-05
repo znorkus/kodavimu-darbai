@@ -17,6 +17,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull
+    @Column(unique = true)
     @Size(min = 6, message = "Username should be at least 6 characters long")
     private String username;
     @NotNull
