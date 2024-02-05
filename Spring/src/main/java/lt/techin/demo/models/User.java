@@ -51,16 +51,16 @@ public class User implements UserDetails {
         return role;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     @Override
@@ -85,6 +85,6 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "ADMIN");
+        return List.of(() -> this.getRole());
     }
 }
