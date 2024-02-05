@@ -4,6 +4,7 @@ import lt.techin.demo.models.User;
 import lt.techin.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -13,11 +14,13 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/users")
@@ -26,21 +29,33 @@ public class UserController {
     }
 
 
-    @GetMapping("/users/{id}")
-    public User getUser(@PathVariable long id) {
-        return this.userService.findUserById(id);
-    }
+//    @GetMapping("/users/{id}")
+//    public User getUser(@PathVariable long id) {
+//        return this.userService.findUserById(id);
+//    }
 
     @PostMapping("/users")
-    public ResponseEntity<User> insertUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = this.userService.saveUser(user);
 
-        return ResponseEntity
-                .created(ServletUriComponentsBuilder.fromCurrentRequest()
-                        .path("/{id}").buildAndExpand(savedUser.getId())
-                        .toUri())
-                .body(savedUser);
+        return ResponseEntity.created(ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedUser.getId())
+                .toUri()).body(savedUser);
     }
+
+//    @PostMapping("/users")
+//    public ResponseEntity<User> insertUser(@RequestBody User user) {
+//        User savedUser = this.userService.saveUser(user);
+//
+//        return ResponseEntity
+//                .created(ServletUriComponentsBuilder.fromCurrentRequest()
+//                        .path("/{id}").buildAndExpand(savedUser.getId())
+//                        .toUri())
+//                .body(savedUser);
+//    }
 
 //    @PutMapping("/users/{id}")
 //    public User updateUser(@RequestBody User user, @PathVariable long id) {
