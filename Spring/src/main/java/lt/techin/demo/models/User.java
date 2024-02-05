@@ -27,10 +27,9 @@ public class User implements UserDetails {
     @Size(min = 4, message = "Role should be ar least 4 characters long")
     private String role;
 
-    public User(String username, String password, String role) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.role = role;
     }
 
     public User() {
@@ -52,16 +51,16 @@ public class User implements UserDetails {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
