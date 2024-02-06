@@ -202,6 +202,32 @@ class MovieControllerTest {
         verify(this.movieService, never()).findMovieById(anyLong());
         verify(this.movieService).saveMovie(argThat(persistedMovie -> persistedMovie.getTitle().equals("New Movie")));
 
+    }
+
+    @Test
+    @WithMockUser(roles = {"USER"})
+    void updateMovie_whenNoMovieFoundUserRequests_thenReturn403() throws Exception {
+        //give
+        Movie newMovie = new Movie("New Movie", "Director C", LocalDate.of(2023, 1, 1), (short) 180);
+
+        given(this.movieService.existsMovieById(anyLong())).willReturn(false);
+        given(this.movieService.saveMovie(any(Movie.class)))
+                .willReturn(newMovie);
+
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
+
+        //when
+        mockMvc.perform(put("/movies/{id}", 58)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(newMovie))
+                        .accept(MediaType.APPLICATION_JSON))
+
+                //then
+                .andExpect(status().isForbidden());
+
+        verify(this.movieService, times(0)).existsMovieById(anyLong());
+        verify(this.movieService, times(0)).saveMovie(any(Movie.class));
 
     }
 
