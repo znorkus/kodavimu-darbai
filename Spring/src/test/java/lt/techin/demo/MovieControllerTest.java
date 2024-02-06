@@ -3,12 +3,15 @@ package lt.techin.demo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.techin.demo.controllers.MovieController;
 import lt.techin.demo.models.Movie;
+import lt.techin.demo.security.SecurityConfig;
 import lt.techin.demo.services.MovieService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
@@ -24,7 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = MovieController.class)
-public class MovieControllerTest {
+@Import(SecurityConfig.class)
+class MovieControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -54,6 +58,7 @@ public class MovieControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = {"ADMIN"})
     void insertMovie_whenSaveMovie_thenReturnIt() throws Exception {
         //given
         Movie movie = new Movie("Delivery Man", "Ken Scott", LocalDate.of(2013, 1, 1), (short) 105);
