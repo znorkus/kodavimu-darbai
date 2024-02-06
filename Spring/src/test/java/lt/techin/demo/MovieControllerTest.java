@@ -85,6 +85,26 @@ class MovieControllerTest {
     }
 
     @Test
+    @WithMockUser
+    void insertMovie_whenUserRequests_thenReturn403() throws Exception {
+        //given
+        Movie movie = new Movie("Delivery Man", "Ken Scott", LocalDate.of(2013, 1, 1), (short) 105);
+        given(this.movieService.saveMovie(any(Movie.class))).willReturn(movie);
+
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
+
+        //when
+        mockMvc.perform(post("/movies")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(movie)))
+
+                //then
+                .andExpect(status().is(403));
+    }
+
+    @Test
     @WithMockUser(roles = {"ADMIN"})
     void updateMovie_whenUpdateFields_thenReturn() throws Exception {
         //given
@@ -190,4 +210,7 @@ class MovieControllerTest {
 
         verify(this.movieService).findMovieById(1L);
     }
+
+    //NOT HAPPY PATH TESTS
+
 }
