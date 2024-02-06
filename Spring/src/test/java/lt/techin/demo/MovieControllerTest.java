@@ -161,8 +161,6 @@ class MovieControllerTest {
     void deleteMovie_whenExistingMovie() throws Exception {
         // Given
         given(this.movieService.existsMovieById(anyLong())).willReturn(true);
-//        given(this.movieService.existsMovieById(any(Movie.class))).willReturn(null);
-//        given(this.movieService.saveMovie(any(Movie.class))).willReturn(null);
         long movieId = 1L;
 
         // When
