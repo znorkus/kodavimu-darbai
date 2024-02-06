@@ -101,7 +101,7 @@ class MovieControllerTest {
                         .content(om.writeValueAsString(movie)))
 
                 //then
-                .andExpect(status().is(403));
+                .andExpect(status().isForbidden());
     }
 
     @Test
