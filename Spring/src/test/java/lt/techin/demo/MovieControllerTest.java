@@ -206,7 +206,7 @@ class MovieControllerTest {
 
     @Test
     @WithMockUser(roles = {"USER"})
-    void updateMovie_whenNoMovieFoundUserRequests_thenReturn403() throws Exception {
+    void updateMovie_whenUserUpdatesMovie_thenReturn403() throws Exception {
         //give
         Movie newMovie = new Movie("New Movie", "Director C", LocalDate.of(2023, 1, 1), (short) 180);
 
@@ -244,6 +244,21 @@ class MovieControllerTest {
                 .andExpect(status().isOk());
 
         verify(this.movieService).deleteMovieById(movieId);
+    }
+
+    @Test
+    @WithMockUser(roles = {"USER"})
+    void deleteMovie_whenUserRequests_thenReturn403() throws Exception {
+        // Given
+        given(this.movieService.existsMovieById(anyLong())).willReturn(true);
+        long movieId = 1L;
+
+        // When
+        mockMvc.perform(delete("/movies/{id}", movieId))
+                // Then
+                .andExpect(status().isForbidden());
+
+        verify(this.movieService, times(0)).existsMovieById(anyLong());
     }
 
     @Test
