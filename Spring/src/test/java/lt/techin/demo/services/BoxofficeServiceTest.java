@@ -5,7 +5,6 @@ import lt.techin.demo.models.Actor;
 import lt.techin.demo.models.Boxoffice;
 import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.BoxofficeRepository;
-import lt.techin.demo.repositories.MovieRepository;
 import lt.techin.demo.services.BoxofficeService;
 import lt.techin.demo.services.MovieService;
 import org.junit.jupiter.api.Test;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -32,8 +32,10 @@ public class BoxofficeServiceTest {
     @Test
         //Given
     void findAllBoxoffices_saveBoxoffices_returned() {
-        Movie movie = this.movieService.saveMovie(new Movie("Test Film", "Stiven Spilberg", (short) 2020, (short) 120));
-        Movie movie2 = this.movieService.saveMovie(new Movie("Test Film2", "Stiven Spilbergg", (short) 2021, (short) 110));
+        Movie movie = this.movieService.saveMovie(new Movie("Test Film", "Stiven Spilberg", LocalDate.of
+                (2020, 1, 1), (short) 120));
+        Movie movie2 = this.movieService.saveMovie(new Movie("Test Film2", "Stiven Spilbergg", LocalDate.of
+                (2021, 1, 1), (short) 110));
 
         Boxoffice savedBoxoffice1 = boxofficeRepository.save(new Boxoffice
                 (movie, 8.5F, 5000000L, 10000000L));
@@ -46,18 +48,17 @@ public class BoxofficeServiceTest {
 
     }
 
-    @Test
-        //Given
-    void findBoxofficeById_saveBoxoffices_returned() {
-        Movie movie = this.movieService.saveMovie(new Movie
-                ("Test Film", "Stiven Spilberg", (short) 2020, (short) 120));
-
-        Boxoffice savedBoxoffice1 = boxofficeRepository.save(new Boxoffice
-                (movie, 8.5F, 5000000L, 10000000L));
-
-        //When
-        Movie movieFromDb = this.boxofficeService.findMovieById(boxoffice.getId());
-
-
-    }
+//    @Test
+//        //Given
+//    void findBoxofficeById_saveBoxoffices_returned() {
+//        Movie movie = this.movieService.saveMovie(new Movie
+//                ("Test Film", "Stiven Spilberg", (short) 2020, (short) 120));
+//
+//        Boxoffice savedBoxoffice1 = boxofficeRepository.save(new Boxoffice
+//                (movie, 8.5F, 5000000L, 10000000L));
+//
+//        //When
+//        Movie movieFromDb = this.boxofficeService.findMovieById(boxoffice.getId());
+//
+//    }
 }
