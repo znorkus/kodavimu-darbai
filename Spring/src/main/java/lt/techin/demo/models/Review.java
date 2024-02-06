@@ -12,16 +12,17 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "Movie_id")
     private Movie movie;
-    private long userId;
-    private String userName;
     private float userReviewRating;
     private String userReviewComment;
 
-    public Review(Movie movie, long userId, String userName, float userReviewRating,
+    @ManyToOne
+    @JoinColumn(name = "User_id")
+    private User user;
+
+    public Review(Movie movie, User user, String userName, float userReviewRating,
                   String userReviewComment) {
         this.movie = movie;
-        this.userId = userId;
-        this.userName = userName;
+        this.user = user;
         this.userReviewRating = userReviewRating;
         this.userReviewComment = userReviewComment;
     }
@@ -38,12 +39,8 @@ public class Review {
         return movie;
     }
 
-    public long getUserId() {
-        return userId;
-    }
-
-    public String getUserName() {
-        return userName;
+    public User getUser() {
+        return user;
     }
 
     public float getUserReviewRating() {
@@ -58,12 +55,8 @@ public class Review {
         this.movie = movie;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setUserReviewRating(float userReviewRating) {
