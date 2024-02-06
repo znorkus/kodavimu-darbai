@@ -36,7 +36,7 @@ class MovieControllerTest {
     private MovieService movieService;
 
     @Test
-    @WithMockUser(roles = {"ADMIN"})
+    @WithMockUser
     void getMovies_saveMovies_returnAll() throws Exception {
         given(this.movieService.findAllMovies())
                 .willReturn(List.of(new Movie
@@ -172,7 +172,7 @@ class MovieControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = {"ADMIN"})
+    @WithMockUser
     void getMovie_whenFindMovie_thenReturn() throws Exception {
 
         Movie movie = new Movie("Delivery Man", "Ken Scott", LocalDate.of(2013, 1, 1), (short) 105);
