@@ -85,7 +85,7 @@ class MovieControllerTest {
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser(roles = {"USER"})
     void insertMovie_whenUserRequests_thenReturn403() throws Exception {
         //given
         Movie movie = new Movie("Delivery Man", "Ken Scott", LocalDate.of(2013, 1, 1), (short) 105);
@@ -130,7 +130,6 @@ class MovieControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Update Movie"))
                 .andExpect(jsonPath("$.director").value("Director B"))
-//                .andExpect(jsonPath("$.dateRelease").value(2022))
                 .andExpect(jsonPath("$.dateRelease").value("2022-01-01"))
                 .andExpect(jsonPath("$.lengthMinutes").value(150));
 
@@ -143,6 +142,34 @@ class MovieControllerTest {
             assertThat(m.getLengthMinutes()).isEqualTo((short) 150);
             return true;
         }));
+    }
+
+    @Test
+    @WithMockUser(roles = {"USER"})
+    void updateMovie_whenUserRequests_thenReturn403() throws Exception {
+        //given
+        Movie existingMovie = new Movie("Existing Movie", "Director A", LocalDate.of(2020, 1, 1), (short) 120);
+        Movie updateMovie = new Movie("Update Movie", "Director B", LocalDate.of(2022, 1, 1), (short) 150);
+
+        given(this.movieService.existsMovieById(anyLong())).willReturn(true);
+        given(this.movieService.findMovieById(anyLong())).willReturn(existingMovie);
+        given(this.movieService.saveMovie(any(Movie.class))).willReturn(updateMovie);
+
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
+
+        //when
+        mockMvc.perform(put("/movies/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(updateMovie))
+                        .accept(MediaType.APPLICATION_JSON))
+
+                //then
+                .andExpect(status().isForbidden());
+
+        verify(this.movieService, times(0)).existsMovieById(anyLong());
+        verify(this.movieService, times(0)).findMovieById(anyLong());
+        verify(this.movieService, times(0)).saveMovie(any(Movie.class));
     }
 
     @Test
