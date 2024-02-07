@@ -1,12 +1,10 @@
-package lt.techin.demo;
+package lt.techin.demo.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lt.techin.demo.controllers.MovieController;
 import lt.techin.demo.models.Movie;
 import lt.techin.demo.security.SecurityConfig;
 import lt.techin.demo.services.MovieService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
