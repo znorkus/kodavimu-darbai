@@ -49,11 +49,6 @@ public class DirectorMovieController {
         return this.directorMovieRepository.save(directorMovie);
     }
 
-    @DeleteMapping("/directorsmovies/{id}")
-    public void deleteDirectorMovie(@PathVariable long id) {
-        this.directorService.deleteDirectorById(id);
-    }
-
     @PutMapping("/directors/{directorId}/movies/{movieId}")
     public ResponseEntity<DirectorMovie> updateDirectorMovie(
             @PathVariable("directorId") long directorId,
@@ -71,4 +66,28 @@ public class DirectorMovieController {
         }
         return null;
     }
+
+    @DeleteMapping("/directors/{directorId}/movies/{movieId}")
+    public ResponseEntity<Void> deleteDirectorMovie(
+            @PathVariable("directorId") long directorId,
+            @PathVariable("movieId") long movieId) {
+
+        Director directorFromDb = this.directorService.findDirectorById(directorId);
+        Movie movieFromDb = this.movieService.findMovieById(movieId);
+        DirectorMovieId directorMovieIdPayload = new DirectorMovieId(directorFromDb, movieFromDb);
+
+        if (this.directorMovieService.existsDirectorMovieById(directorMovieIdPayload)) {
+            this.directorMovieService.deleteDirectorMovieById(directorMovieIdPayload);
+
+            return ResponseEntity.noContent().build();
+
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 }
+
+//    @DeleteMapping("/directors/{directorId}/movies/{movieId}")
+//    public void deleteDirectorMovie(@PathVariable long id) {
+//        this.directorService.deleteDirectorById(id);
+//    }
