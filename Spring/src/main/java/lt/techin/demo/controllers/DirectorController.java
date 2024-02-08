@@ -72,7 +72,7 @@ public class DirectorController {
         }
     }
 
-//    @PutMapping("/directors/{id}")
+    //    @PutMapping("/directors/{id}")
 //    public Director updateDirector(@RequestBody Director director, @PathVariable long id) {
 //        if (this.directorService.existsDirectorById(id)) {
 //            Director directorFromDb = this.directorService.findDirectorById(id);
@@ -85,9 +85,18 @@ public class DirectorController {
 //
 //        return this.directorService.saveDirector(director);
 //    }
-
     @DeleteMapping("/directors/{id}")
-    public void deleteDirector(@PathVariable long id) {
-        this.directorService.deleteDirectorById(id);
+    public ResponseEntity<Void> deleteDirector(@PathVariable long id) {
+        if (directorService.existsDirectorById(id)) {
+            directorService.deleteDirectorById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+//    @DeleteMapping("/directors/{id}")
+//    public void deleteDirector(@PathVariable long id) {
+//        this.directorService.deleteDirectorById(id);
+//    }
     }
 }
