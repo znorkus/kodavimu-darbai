@@ -5,6 +5,8 @@ import lt.techin.demo.models.*;
 import lt.techin.demo.repositories.DirectorMovieRepository;
 import lt.techin.demo.services.DirectorService;
 import lt.techin.demo.services.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +18,7 @@ public class DirectorMovieController {
     private final DirectorService directorService;
     private final MovieService movieService;
 
+    @Autowired
     public DirectorMovieController(DirectorMovieRepository directorMovieRepository,
                                    DirectorService directorService, MovieService movieService) {
         this.directorMovieRepository = directorMovieRepository;
@@ -41,5 +44,28 @@ public class DirectorMovieController {
     @PostMapping("/directorsmovies")
     public DirectorMovie saveDirectorMovie(@RequestBody DirectorMovie directorMovie) {
         return this.directorMovieRepository.save(directorMovie);
+    }
+
+    @DeleteMapping("/directorsmovies/{id}")
+    public void deleteDirectorMovie(@PathVariable long id) {
+        this.directorService.deleteDirectorById(id);
+    }
+
+    @PutMapping("/directors/{directorId}/movies/{movieId}")
+    public ResponseEntity<DirectorMovie> updateDirectorMovie(
+            @PathVariable("directorId") long directorId,
+            @PathVariable("movieId") long movieId,
+            @RequestBody DirectorMovie directorMoviePayload) {
+
+        Director directorFromDb = this.directorService.findDirectorById(directorId);
+        Movie movieFromDb = this.movieService.findMovieById(movieId);
+        DirectorMovieId directorMovieIdPayload = new DirectorMovieId(directorFromDb, movieFromDb);
+
+        if (this.directorMovieService.existsDirectorMovieById(directorMovieIdPayload)) {
+            this.directorMovieService.deleteDirectorMovieById(directorMovieIdPayload);
+
+            return ResponseEntity.ok(this.directorMovieService.saveDirectorMovie(directorMoviePayload));
+        }
+        return null;
     }
 }
