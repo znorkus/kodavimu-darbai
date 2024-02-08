@@ -3,6 +3,7 @@ package lt.techin.demo.controllers;
 
 import lt.techin.demo.models.*;
 import lt.techin.demo.repositories.DirectorMovieRepository;
+import lt.techin.demo.services.DirectorMovieService;
 import lt.techin.demo.services.DirectorService;
 import lt.techin.demo.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,15 @@ public class DirectorMovieController {
 
     private final DirectorMovieRepository directorMovieRepository;
     private final DirectorService directorService;
+    private final DirectorMovieService directorMovieService;
     private final MovieService movieService;
 
     @Autowired
     public DirectorMovieController(DirectorMovieRepository directorMovieRepository,
-                                   DirectorService directorService, MovieService movieService) {
+                                   DirectorService directorService, DirectorMovieService directorMovieService, MovieService movieService) {
         this.directorMovieRepository = directorMovieRepository;
         this.directorService = directorService;
+        this.directorMovieService = directorMovieService;
         this.movieService = movieService;
     }
 
