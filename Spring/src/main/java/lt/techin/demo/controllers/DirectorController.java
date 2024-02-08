@@ -3,6 +3,7 @@ package lt.techin.demo.controllers;
 import lt.techin.demo.models.Director;
 import lt.techin.demo.services.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -20,16 +21,26 @@ public class DirectorController {
         this.directorService = directorService;
     }
 
+//    @GetMapping("/directors")
+//    public List<Director> getDirectors() {
+//        return this.directorService.findAllDirectors();
+//    }
+
     @GetMapping("/directors")
-    public List<Director> getDirectors() {
-        return this.directorService.findAllDirectors();
+    public ResponseEntity<List<Director>> getDirectors() {
+        List<Director> directors = directorService.findAllDirectors();
+        if (directors.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(directors);
+        }
     }
 
 
-    @GetMapping("/directors/{id}")
-    public Director getDirector(@PathVariable long id) {
-        return this.directorService.findDirectorById(id);
-    }
+//    @GetMapping("/directors/{id}")
+//    public Director getDirector(@PathVariable long id) {
+//        return this.directorService.findDirectorById(id);
+//    }
 
     @PostMapping("/directors")
     public ResponseEntity<Director> insertDirector(@RequestBody Director director) {
@@ -46,18 +57,34 @@ public class DirectorController {
 //    }
 
     @PutMapping("/directors/{id}")
-    public Director updateDirector(@RequestBody Director director, @PathVariable long id) {
-        if (this.directorService.existsDirectorById(id)) {
-            Director directorFromDb = this.directorService.findDirectorById(id);
+    public ResponseEntity<Director> updateDirector(@RequestBody Director director, @PathVariable long id) {
+        if (directorService.existsDirectorById(id)) {
+            Director directorFromDb = directorService.findDirectorById(id);
 
             directorFromDb.setName(director.getName());
             directorFromDb.setAge(director.getAge());
 
-            return this.directorService.saveDirector(directorFromDb);
+            Director updatedDirector = directorService.saveDirector(directorFromDb);
+            return ResponseEntity.ok(updatedDirector);
+        } else {
+            Director savedDirector = directorService.saveDirector(director);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedDirector);
         }
-
-        return this.directorService.saveDirector(director);
     }
+
+//    @PutMapping("/directors/{id}")
+//    public Director updateDirector(@RequestBody Director director, @PathVariable long id) {
+//        if (this.directorService.existsDirectorById(id)) {
+//            Director directorFromDb = this.directorService.findDirectorById(id);
+//
+//            directorFromDb.setName(director.getName());
+//            directorFromDb.setAge(director.getAge());
+//
+//            return this.directorService.saveDirector(directorFromDb);
+//        }
+//
+//        return this.directorService.saveDirector(director);
+//    }
 
     @DeleteMapping("/directors/{id}")
     public void deleteDirector(@PathVariable long id) {
