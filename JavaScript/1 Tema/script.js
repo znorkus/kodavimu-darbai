@@ -17,6 +17,9 @@ function mathCalculation(x) {
 }
 let x = 2;
 mathCalculation(x);
+//arba
+// const x = 5;
+// const result = mathCalculation(x)
 
 //3
 
@@ -28,3 +31,14 @@ function oddOrEven(num) {
   }
 }
 console.log(oddOrEven(5));
+
+//4
+
+function whichNumberIsBigger(num1, num2) {
+  if (num1 > num2 && num1 != num2) {
+    return num1;
+  } else {
+    return num2;
+  }
+}
+console.log(whichNumberIsBigger(5, 8));
