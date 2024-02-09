@@ -22,9 +22,9 @@ mathCalculation(x);
 
 function oddOrEven(num) {
   if (num % 2 === 0) {
-    return "even";
+    return `Number ${num} is even`;
   } else {
-    return "odd";
+    return `Number ${num} is odd`;
   }
 }
 console.log(oddOrEven(5));
