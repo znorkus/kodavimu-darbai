@@ -11,8 +11,20 @@ console.log(result);
 
 //2
 
-let x;
 function mathCalculation(x) {
   const y = Math.pow(16 * x, 4) + 2 * x;
   console.log(y);
 }
+let x = 2;
+mathCalculation(x);
+
+//3
+
+function oddOrEven(num) {
+  if (num % 2 === 0) {
+    return "even";
+  } else {
+    return "odd";
+  }
+}
+console.log(oddOrEven(5));
