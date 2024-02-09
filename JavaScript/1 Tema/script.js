@@ -10,3 +10,9 @@ const result = daysToHoursAndMinutes(days);
 console.log(result);
 
 //2
+
+let x;
+function mathCalculation(x) {
+  const y = Math.pow(16 * x, 4) + 2 * x;
+  console.log(y);
+}
