@@ -42,3 +42,21 @@ function whichNumberIsBigger(num1, num2) {
   }
 }
 console.log(whichNumberIsBigger(5, 8));
+
+//5
+
+function gradeCounter(points) {
+  if (points <= 29) {
+    console.log("Failed");
+  } else if (points > 29 && points <= 34) {
+    console.log("Your Grade is 1");
+  } else if (points > 34 && points <= 39) {
+    console.log("Your Grade is 2");
+  } else if (points > 39 && points <= 44) {
+    console.log("Your Grade is 3");
+  } else if (points > 44 && points <= 49) {
+    console.log("Your Grade is 4");
+  } else {
+    console.log("Your Grade is 5");
+  }
+}
