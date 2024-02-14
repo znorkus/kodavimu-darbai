@@ -9,5 +9,3 @@ export default function PostContent() {
     </>
   );
 }
-
-// export default PostContent;
