@@ -23,7 +23,7 @@ export default function App() {
           <button
             onClick={changeBtnPress}
             type="button"
-            className={btnPress ? "btn btn-success" : "btn btn-danger"}
+            className={`btn ${btnPress ? "btn-success" : "btn-danger"}`}
           >
             {btnPress ? "DONE" : "Mark as DONE"}
           </button>
