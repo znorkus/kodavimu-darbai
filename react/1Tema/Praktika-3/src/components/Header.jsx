@@ -1,7 +1,7 @@
 import "./Header.css";
 
 export default function Header(props) {
-  // console.log(props);
+  console.log(props);
 
   return (
     <div className="header">
