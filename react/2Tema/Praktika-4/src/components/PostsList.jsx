@@ -6,14 +6,15 @@ export default function PostsList() {
   const [posts, setPosts] = useState(data);
 
   const changeStatus = (id) => {
-    const updatePosts = [...posts];
-    updatePosts.forEach((post) => {
-      if (posts.id === id) {
-        posts.status = true;
+    const updatedPosts = posts.map((post) => {
+      if (post.id === id) {
+        return { ...post, status: true };
+      } else {
+        return post;
       }
     });
 
-    setPosts(updatePosts);
+    setPosts(updatedPosts);
   };
 
   const postsList = posts.map((post) => {
