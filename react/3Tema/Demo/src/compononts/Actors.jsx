@@ -28,26 +28,50 @@ export default function Actors() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <input
         defaultValue="Name"
-        {...register("name")}
+        {...register("name", { required: true, minLength: 2 })}
       />
+      {errors.name && errors.name.type === "required" && (
+        <span>Name field is required</span>
+      )}
+      {errors.name && errors.name.type === "minLength" && (
+        <span>Name must be at least 2 characters long</span>
+      )}
 
       <input
         defaultValue="Age"
         type="number"
-        {...register("age")}
+        {...register("age", { required: true, min: 5 })}
       />
+      {errors.name && errors.name.type === "required" && (
+        <span>Age field is required</span>
+      )}
+      {errors.age && errors.age.type === "min" && (
+        <span>Actor must be at least 5 year old</span>
+      )}
 
       <input
         type="number"
         defaultValue="Height"
-        {...register("height")}
+        {...register("height", { required: true, min: 50 })}
       />
+      {errors.height && errors.height.type === "required" && (
+        <span>Height field is required</span>
+      )}
+      {errors.height && errors.height.type === "min" && (
+        <span>Actor must be at least 50 centimeters tall</span>
+      )}
 
       <input
         type="number"
         defaultValue="Salary"
-        {...register("salary")}
+        {...register("salary", { required: true, min: 1 })}
       />
+      {errors.salary && errors.salary.type === "required" && (
+        <span>Salary field is required</span>
+      )}
+      {errors.salary && errors.salary.type === "min" && (
+        <span>Actor's salary must be at least 1usd.</span>
+      )}
 
       <input type="submit" />
     </form>
