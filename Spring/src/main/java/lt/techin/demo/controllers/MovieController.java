@@ -44,27 +44,27 @@ public class MovieController {
 //        return this.movieService.saveMovie(movie);
 //    }
 
-    @PutMapping("/movies/{id}")
-//    public Movie updateMovie(@RequestBody Movie movie, @PathVariable long id) {
-    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie, @PathVariable long id) {
-        if (this.movieService.existsMovieById(id)) {
-            Movie movieFromDb = this.movieService.findMovieById(id);
-
-            movieFromDb.setDirector(movie.getDirector());
-            movieFromDb.setTitle(movie.getTitle());
-            movieFromDb.setLengthMinutes(movie.getLengthMinutes());
-            movieFromDb.setDateRelease(movie.getDateRelease());
-
-            this.movieService.saveMovie(movieFromDb);
-            return ResponseEntity.ok(movieFromDb);
-        }
-        Movie updatedMovie = this.movieService.saveMovie(movie);
-
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
-                        .path("/{id}").buildAndExpand(updatedMovie.getId())
-                        .toUri())
-                .body(updatedMovie);
-    }
+//    @PutMapping("/movies/{id}")
+////    public Movie updateMovie(@RequestBody Movie movie, @PathVariable long id) {
+//    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie, @PathVariable long id) {
+//        if (this.movieService.existsMovieById(id)) {
+//            Movie movieFromDb = this.movieService.findMovieById(id);
+//
+//            movieFromDb.setDirector(movie.getDirector());
+//            movieFromDb.setTitle(movie.getTitle());
+//            movieFromDb.setLengthMinutes(movie.getLengthMinutes());
+//            movieFromDb.setYearRelease(movie.getYearRelease());
+//
+//            this.movieService.saveMovie(movieFromDb);
+//            return ResponseEntity.ok(movieFromDb);
+//        }
+//        Movie updatedMovie = this.movieService.saveMovie(movie);
+//
+//        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
+//                        .path("/{id}").buildAndExpand(updatedMovie.getId())
+//                        .toUri())
+//                .body(updatedMovie);
+//    }
 
     @DeleteMapping("/movies/{id}")
 //    public void deleteMovie(@PathVariable long id) {
