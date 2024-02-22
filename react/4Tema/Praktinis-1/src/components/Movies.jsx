@@ -18,7 +18,7 @@ export default function Movies() {
   }, []);
 
   return (
-    <div className="container">
+    <div>
       <table className="table table-dark table-striped table-hover">
         <thead>
           <tr>
