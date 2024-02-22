@@ -17,6 +17,15 @@ export default function Actors() {
     getData();
   }, []);
 
+  const deleteData = async (id) => {
+    const response = await fetch(`http://localhost:8080/actors/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: "Basic " + btoa("jurgis55:kodas1234") },
+    });
+    const updatedData = data.filter((actor) => actor.id !== id);
+    setData(updatedData);
+  };
+
   return (
     <div>
       <table className="table table-dark table-striped table-hover">
@@ -27,6 +36,7 @@ export default function Actors() {
             <th scope="col">Age:</th>
             <th scope="col">Height:</th>
             <th scope="col">Salary:</th>
+            <th scoper="col">Delete:</th>
           </tr>
         </thead>
         <tbody>
@@ -37,6 +47,9 @@ export default function Actors() {
               <td>{actor.age}</td>
               <td>{actor.height}</td>
               <td>{actor.salary}</td>
+              <td>
+                <button onClick={() => deleteData(actor.id)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
