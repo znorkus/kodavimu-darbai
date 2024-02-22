@@ -2,6 +2,7 @@ import { Route, Routes, NavLink } from "react-router-dom";
 import Movies from "./components/Movies";
 import Actors from "./components/Actors";
 import ErrorPage from "./components/ErrorPage";
+import Movie from "./components/Movie";
 export default function App() {
   return (
     <>
@@ -17,7 +18,7 @@ export default function App() {
           </ul>
         </nav>
       </header>
-      <main>
+      <main className="container">
         <Routes>
           <Route
             path="/movies"
@@ -30,6 +31,10 @@ export default function App() {
           <Route
             path="*"
             element={<ErrorPage />}
+          />
+          <Route
+            path="/movies/:id"
+            element={<Movie />}
           />
         </Routes>
       </main>
