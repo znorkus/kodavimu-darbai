@@ -14,9 +14,6 @@ export default function App() {
             <li>
               <NavLink to="/movies">Movies</NavLink>
             </li>
-            <li>
-              <NavLink to="/error">Error Page</NavLink>
-            </li>
           </ul>
         </nav>
       </header>
@@ -31,7 +28,7 @@ export default function App() {
             element={<Actors />}
           />
           <Route
-            path="/error"
+            path="*"
             element={<ErrorPage />}
           />
         </Routes>
