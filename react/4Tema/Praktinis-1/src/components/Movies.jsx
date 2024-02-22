@@ -18,23 +18,25 @@ export default function Movies() {
   }, []);
 
   return (
-    <table className="table table-dark">
-      <thead>
-        <tr>
-          <th scope="col">ID:</th>
-          <th scope="col">Director:</th>
-          <th scope="col">Title:</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((movie) => (
-          <tr key={movie.id}>
-            <th>{movie.id}</th>
-            <td>{movie.director}</td>
-            <td>{movie.title}</td>
+    <div className="container">
+      <table className="table table-dark table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID:</th>
+            <th scope="col">Director:</th>
+            <th scope="col">Title:</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map((movie) => (
+            <tr key={movie.id}>
+              <th>{movie.id}</th>
+              <td>{movie.director}</td>
+              <td>{movie.title}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

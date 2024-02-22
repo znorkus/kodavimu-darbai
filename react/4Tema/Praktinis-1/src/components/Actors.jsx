@@ -18,8 +18,8 @@ export default function Actors() {
   }, []);
 
   return (
-    <>
-      <table className="table table-dark">
+    <div className="container">
+      <table className="table table-dark table-striped table-hover">
         <thead>
           <tr>
             <th scope="col">ID:</th>
@@ -41,6 +41,6 @@ export default function Actors() {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
