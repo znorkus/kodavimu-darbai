@@ -19,14 +19,28 @@ export default function Actors() {
 
   return (
     <>
-      {data.map((actor) => (
-        <div key={actor.id}>
-          <p>name: {actor.name}</p>
-          <p>age: {actor.age}</p>
-          <p>height: {actor.height}</p>
-          <p>salary: {actor.salary}</p>
-        </div>
-      ))}
+      <table className="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">ID:</th>
+            <th scope="col">Name:</th>
+            <th scope="col">Age:</th>
+            <th scope="col">Height:</th>
+            <th scope="col">Salary:</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((actor) => (
+            <tr key={actor.id}>
+              <th>{actor.id}</th>
+              <td>{actor.name}</td>
+              <td>{actor.age}</td>
+              <td>{actor.height}</td>
+              <td>{actor.salary}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
