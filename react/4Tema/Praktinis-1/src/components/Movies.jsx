@@ -29,5 +29,3 @@ export default function Movies() {
     </>
   );
 }
-
-//comment for repush
