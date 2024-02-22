@@ -19,11 +19,6 @@ export default function Movies() {
 
   return (
     <>
-      {/* <h1>Resources</h1>
-      <p> vkjshbvjdfvkjdfbhvkjdhfbv</p> */}
-      {/* <button onClick={() => getData}>/movies</button> */}
-      <p onClick={getData}>Movies:</p>
-
       {data.map((movie) => (
         <div key={movie.id}>
           <p>movie id: {movie.id}</p>

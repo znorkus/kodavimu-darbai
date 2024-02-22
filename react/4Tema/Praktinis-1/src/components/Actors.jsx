@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Actors() {
   const [data, setData] = useState([]);
@@ -19,8 +20,6 @@ export default function Actors() {
 
   return (
     <>
-      <p onClick={getData}>Actors:</p>
-
       {data.map((actor) => (
         <div key={actor.id}>
           <p>name: {actor.name}</p>
