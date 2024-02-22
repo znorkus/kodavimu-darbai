@@ -3,6 +3,7 @@ import Movies from "./components/Movies";
 import Actors from "./components/Actors";
 import ErrorPage from "./components/ErrorPage";
 import Movie from "./components/Movie";
+import Actor from "./components/Actor";
 export default function App() {
   return (
     <div className="container">
@@ -35,6 +36,10 @@ export default function App() {
           <Route
             path="/movies/:id"
             element={<Movie />}
+          />
+          <Route
+            path="/actors/:id"
+            element={<Actor />}
           />
         </Routes>
       </main>
