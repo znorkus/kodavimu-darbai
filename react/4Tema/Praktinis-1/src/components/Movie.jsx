@@ -21,7 +21,7 @@ export default function Movie() {
 
   return (
     <div>
-      <table class="table table-striper table-dark table-hover">
+      <table className="table table-striper table-dark table-hover">
         <thead>
           <tr>
             <th scope="col">Id:</th>
