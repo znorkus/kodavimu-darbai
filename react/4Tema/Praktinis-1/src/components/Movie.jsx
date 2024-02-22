@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function Movie() {
-  const [movie, setData] = useState([]);
+  const [movie, setMovie] = useState([]);
   const { id } = useParams();
 
   const getData = async () => {
@@ -11,7 +11,7 @@ export default function Movie() {
       headers: { Authorization: "Basic " + btoa("jurgis55:kodas1234") },
     });
     const data = await response.json();
-    setData(data);
+    setMovie(data);
     console.log(data);
   };
 
