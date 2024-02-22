@@ -17,6 +17,15 @@ export default function Movies() {
     getData();
   }, []);
 
+  const deleteData = async (id) => {
+    const response = await fetch(`http://localhost:8080/movies/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: "Basic " + btoa("jurgis55:kodas1234") },
+    });
+    const updatedData = data.filter((movie) => movie.id !== id);
+    setData(updatedData);
+  };
+
   return (
     <div>
       <table className="table table-dark table-striped table-hover">
@@ -25,6 +34,7 @@ export default function Movies() {
             <th scope="col">ID:</th>
             <th scope="col">Director:</th>
             <th scope="col">Title:</th>
+            <th scoper="col">Delete:</th>
           </tr>
         </thead>
         <tbody>
@@ -33,6 +43,9 @@ export default function Movies() {
               <th>{movie.id}</th>
               <td>{movie.director}</td>
               <td>{movie.title}</td>
+              <td>
+                <button onClick={() => deleteData(movie.id)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
