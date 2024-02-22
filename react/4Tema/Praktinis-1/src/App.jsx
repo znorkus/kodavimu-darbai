@@ -5,7 +5,7 @@ import ErrorPage from "./components/ErrorPage";
 import Movie from "./components/Movie";
 export default function App() {
   return (
-    <>
+    <div className="container">
       <header>
         <nav>
           <ul>
@@ -18,7 +18,7 @@ export default function App() {
           </ul>
         </nav>
       </header>
-      <main className="container">
+      <main>
         <Routes>
           <Route
             path="/movies"
@@ -38,6 +38,6 @@ export default function App() {
           />
         </Routes>
       </main>
-    </>
+    </div>
   );
 }
